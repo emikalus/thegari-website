@@ -141,6 +141,108 @@
       .footer-links { justify-content: start; text-align: left; }
       .brand img { width: 150px; }
     }
+
+    .mission-statement {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 36px;
+      padding: 38px;
+      box-shadow: 0 18px 50px rgba(11,36,71,.08);
+      display: grid;
+      grid-template-columns: .78fr 1.22fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .mission-statement .statement {
+      font-size: clamp(25px, 3vw, 38px);
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+      color: var(--navy);
+      font-weight: 950;
+      margin: 0;
+    }
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      background: #071b36;
+    }
+    .video-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .donate-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      margin-top: 32px;
+    }
+    .donate-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 0 16px 44px rgba(11,36,71,.08);
+      text-align: left;
+    }
+    .donate-card h3 {
+      margin: 0 0 10px;
+      font-size: 26px;
+      color: var(--navy);
+      letter-spacing: -0.04em;
+    }
+    .donate-card p { color: var(--muted); margin: 0 0 22px; }
+    .ib-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      align-items: center;
+    }
+    .ib-panel {
+      background: linear-gradient(135deg, rgba(20,88,200,.08), rgba(22,163,166,.10));
+      border: 1px solid var(--line);
+      border-radius: 36px;
+      padding: 38px;
+    }
+    .ib-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .ib-list div {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 16px 18px;
+      color: var(--muted);
+      box-shadow: 0 10px 24px rgba(11,36,71,.05);
+    }
+    .compact-founder {
+      background: var(--soft);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 42px 0;
+    }
+    .compact-founder-box {
+      display: grid;
+      grid-template-columns: .7fr 1.3fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .compact-founder p { color: var(--muted); margin: 0; font-size: 17px; }
+    @media (max-width: 900px) {
+      .mission-statement, .donate-grid, .ib-split, .compact-founder-box {
+        grid-template-columns: 1fr;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -151,9 +253,9 @@
         <a href="#mission">Mission</a>
         <a href="#programs">Programs</a>
         <a href="#impact">Impact</a>
-        <a href="#founder">Founder</a>
+        <a href="#donate">Donate</a>
       </nav>
-      <a class="button primary" href="#support">Support GARI</a>
+      <a class="button primary" href="#donate">Donate</a>
     </div>
   </header>
 
@@ -166,7 +268,7 @@
           <p>The Global Accessibility Research Institute is a nonprofit organization developing practical assistive technology, education tools, and accessibility research programs for families and communities facing real-world challenges.</p>
           <div class="hero-actions">
             <a class="button primary" href="#programs">Explore Our Work</a>
-            <a class="button secondary" href="#support">Help Fund the Mission</a>
+            <a class="button secondary" href="#donate">Help Fund the Mission</a>
           </div>
           <div class="trust-strip">
             <div class="trust-item"><strong>Nonprofit Mission</strong><span>Built around charitable, educational, and research purposes.</span></div>
@@ -189,6 +291,42 @@
       </div>
     </section>
 
+
+    <section class="section">
+      <div class="container">
+        <div class="mission-statement">
+          <div>
+            <div class="kicker">Concise mission</div>
+            <p class="statement">GARI builds practical accessibility tools that reduce stress, improve independence, and help families manage complex daily challenges.</p>
+          </div>
+          <p class="lead" style="margin-top:0;">
+            We connect research, systems engineering, community feedback, and prototype development to create assistive technology that can move from idea to real-world use.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="container">
+        <div class="section-head center">
+          <div class="kicker">Watch the mission</div>
+          <h2>Why Insulin Buddy matters.</h2>
+          <p class="lead">This short video explains the family problem GARI is working to solve first.</p>
+        </div>
+        <div class="video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/q58dL1hsIAQ"
+            title="GARI Insulin Buddy explainer video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <p style="text-align:center;color:var(--muted);margin-top:18px;">
+          Trouble viewing the video? <a href="https://youtu.be/q58dL1hsIAQ" target="_blank" rel="noopener" style="color:var(--blue);font-weight:850;">Open it on YouTube</a>.
+        </p>
+      </div>
+    </section>
+
     <section id="mission" class="section">
       <div class="container split">
         <div class="mission-panel">
@@ -201,6 +339,32 @@
           <div class="check"><div class="checkmark">✓</div><div><strong>Accessibility research</strong><br><span style="color:var(--muted)">Exploring how technology, education, and systems engineering can improve independence and inclusion.</span></div></div>
           <div class="check"><div class="checkmark">✓</div><div><strong>Education and support</strong><br><span style="color:var(--muted)">Creating clear learning resources that help people understand and manage complex daily challenges.</span></div></div>
           <div class="check"><div class="checkmark">✓</div><div><strong>Prototype-to-impact pathway</strong><br><span style="color:var(--muted)">Building, testing, improving, and deploying tools with real-world feedback.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="insulin-buddy" class="section">
+      <div class="container ib-split">
+        <div>
+          <div class="kicker">First initiative</div>
+          <h2>Insulin Buddy helps families bring diabetes care home with more confidence.</h2>
+          <p class="lead">
+            When a child is newly diagnosed with diabetes, families suddenly face insulin math, blood sugar routines, carbohydrate counting, supplies, reminders, and fear of making mistakes. Insulin Buddy is being developed as a practical station to help organize that daily burden.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://www.insulinbuddy.org" target="_blank" rel="noopener">Visit Insulin Buddy</a>
+            <a class="button secondary" href="#donate">Help Fund the Prototype</a>
+          </div>
+        </div>
+        <div class="ib-panel">
+          <h3 style="font-size:28px;margin:0;color:var(--navy);letter-spacing:-0.04em;">What the station is intended to support</h3>
+          <div class="ib-list">
+            <div><strong style="color:var(--navy);">Organization:</strong> supplies, routines, reminders, and family checklists.</div>
+            <div><strong style="color:var(--navy);">Education:</strong> plain-language guidance families can revisit after diagnosis.</div>
+            <div><strong style="color:var(--navy);">Confidence:</strong> a calmer home base for daily diabetes management tasks.</div>
+            <div><strong style="color:var(--navy);">Pilot feedback:</strong> early testing with families, educators, and diabetes support stakeholders.</div>
+          </div>
         </div>
       </div>
     </section>
@@ -250,7 +414,7 @@
             <div class="kicker" style="color:#8ee6e8;">How support helps</div>
             <h2>Donations move ideas from concept to prototype to families.</h2>
             <p>Early support helps GARI build credible prototypes, create educational materials, gather feedback, and prepare pilot deployments for real users.</p>
-            <div style="margin-top:28px;"><a class="button primary" href="#support">Support the Mission</a></div>
+            <div style="margin-top:28px;"><a class="button primary" href="#donate">Support the Mission</a></div>
           </div>
           <div class="funds">
             <div class="fund"><div class="num">1</div><div><strong>Prototype development</strong><br><span style="color:rgba(255,255,255,.72)">Hardware, software, design, and user workflow development.</span></div></div>
@@ -261,38 +425,49 @@
       </div>
     </section>
 
-    <section id="founder" class="section soft">
-      <div class="container founder">
-        <div class="founder-photo">
-          <div>
-            <div class="photo-placeholder">ME</div>
-            <strong style="font-size:22px;color:var(--navy)">Founder profile photo</strong>
-            <p style="color:var(--muted);max-width:360px;margin:10px auto 0;">Replace this block later with a professional founder photo or short video introduction.</p>
-          </div>
-        </div>
+
+    <section id="founder" class="compact-founder">
+      <div class="container compact-founder-box">
         <div>
-          <div class="kicker">Founder perspective</div>
-          <h2>Built with engineering discipline and family-centered urgency.</h2>
-          <p class="lead">GARI was founded to connect technical skill with real human problems. The goal is to build practical tools that reduce stress, improve organization, and help people navigate difficult life challenges with better support.</p>
-          <p style="color:var(--muted);font-size:18px;">This section can later include a stronger founder story, professional background, why accessibility matters personally, and why GARI is starting with Insulin Buddy.</p>
+          <div class="kicker">Founder-led</div>
+          <h2 style="font-size:clamp(28px,3vw,40px);">Engineering discipline. Human urgency.</h2>
+        </div>
+        <p>
+          GARI is being built with a systems engineering mindset: define the need, build practical prototypes, gather feedback, improve the design, and deploy responsibly. The founder section can be expanded later, but the current focus is the mission and the first prototype initiative.
+        </p>
+      </div>
+    </section>
+
+
+    <section id="donate" class="section">
+      <div class="container">
+        <div class="cta">
+          <div class="kicker">Donate</div>
+          <h2>Help build practical accessibility technology.</h2>
+          <p class="lead" style="max-width:820px;margin-left:auto;margin-right:auto;">
+            Your support helps GARI build the Insulin Buddy prototype, create family-friendly education materials, gather feedback, and prepare for early pilot deployments.
+          </p>
+
+          <div class="donate-grid">
+            <div class="donate-card">
+              <h3>Donate through GoFundMe</h3>
+              <p>Use GoFundMe if you want to support the campaign and share it easily with family, friends, and social networks.</p>
+              <a class="button primary" href="https://gofund.me/669ca44f7" target="_blank" rel="noopener">Give on GoFundMe</a>
+            </div>
+            <div class="donate-card">
+              <h3>Donate through Zeffy</h3>
+              <p>Use Zeffy if you want a nonprofit-focused donation page for helping build Insulin Buddy for childhood diabetes.</p>
+              <a class="button primary" href="https://www.zeffy.com/en-US/donation-form/help-build-insulin-buddy-for-childhood-diabetes" target="_blank" rel="noopener">Give on Zeffy</a>
+            </div>
+          </div>
+
+          <p style="color:var(--muted);font-size:14px;margin-top:24px;">
+            Donations support prototype development, educational content, pilot preparation, and outreach for GARI initiatives.
+          </p>
         </div>
       </div>
     </section>
 
-    <section id="support" class="section">
-      <div class="container">
-        <div class="cta">
-          <div class="kicker">Support GARI</div>
-          <h2>Help us build practical accessibility technology.</h2>
-          <p class="lead" style="max-width:760px;margin-left:auto;margin-right:auto;">We are building the foundation for a nonprofit research institute that can prototype, test, and deploy tools for families and communities who need practical support.</p>
-          <div class="hero-actions" style="justify-content:center;">
-            <a class="button primary" href="mailto:contact@thegari.org">Contact GARI</a>
-            <a class="button secondary" href="https://www.insulinbuddy.org">See Insulin Buddy</a>
-          </div>
-          <p style="color:var(--muted);font-size:14px;margin-top:20px;">Donation links, GoFundMe, Zeffy, and official email can be added after your bank account and fundraising tools are ready.</p>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer>
@@ -306,6 +481,7 @@
         <a href="#mission">Mission</a>
         <a href="#programs">Programs</a>
         <a href="#impact">Impact</a>
+        <a href="#donate">Donate</a>
         <a href="mailto:contact@thegari.org">contact@thegari.org</a>
       </div>
     </div>
