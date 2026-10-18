@@ -8,7 +8,7 @@
 <section id="workspace" class="hidden" aria-labelledby="work-heading"><div class="toprow"><div><h2 id="work-heading">Member workspace</h2><p id="identity"></p></div><button class="secondary" id="signout">Sign out</button></div><p id="role" class="eyebrow"></p><div id="tiles" class="grid"></div><div class="notice">Organizational resources are available according to your assigned access.</div></section>
 </main>
 <script type="module">
-const config={url:"",anonKey:""}; // Add only the project URL and public publishable/anon key. Never insert service_role keys.
+const config={url:"https://omvodemyoyknthiqqmgl.supabase.co",anonKey:"sb_publishable_9j3zSGp-YFKvBmfNSjki3Q_EDz4wC82"}; // Add only the project URL and public publishable/anon key. Never insert service_role keys.
 const $=id=>document.getElementById(id);
 const permissions={admin:[["Administration","Manage GARI membership and organizational access using approved administrative tools."],["Research oversight","Research initiatives, records, and institute reporting."],["Governance","Board and officer administration."]],employee:[["Team resources","Internal onboarding, operating procedures and shared working materials."],["Research workspace","Assigned studies, tasks and deliverables."]],board:[["Board governance","Meeting schedules, approved minutes, policies and resolutions."],["Board materials","Briefings and materials released for board review."]],officer:[["Organization operations","Approvals, administrative activity and cross-functional oversight."],["Governance & reporting","Organizational reports and officer-specific actions."]]};
 if(config.url&&config.anonKey){
