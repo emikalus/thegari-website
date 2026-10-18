@@ -31,7 +31,43 @@ async function renderDocuments(){
  for(const folder of available){const block=document.createElement("details");block.style.margin="12px 0";block.open=documents.some(d=>d.folder===folder);const summary=document.createElement("summary");summary.style.cursor="pointer";summary.style.fontWeight="700";summary.textContent=folder+" — "+folderNames[folder];block.append(summary);
  const docs=documents.filter(d=>d.folder===folder);
  if(!docs.length){const empty=document.createElement("p");empty.textContent="No documents yet.";block.append(empty);}
- for(const d of docs){const row=document.createElement("div");row.style.padding="9px 5px";const b=document.createElement("button");b.className="secondary";b.style.margin="0";b.textContent=d.title+" · "+d.lifecycle;b.addEventListener("click",async()=>{b.disabled=true;const {data:link,error:e}=await supabase.storage.from("gari-documents").createSignedUrl(d.object_path,60);if(e)status.textContent="Unable to access this document.";else window.open(link.signedUrl,"_blank","noopener");b.disabled=false;});row.append(b);block.append(row);}
+ for(const d of docs){const row=document.createElement("div");row.style.padding="9px 5px";const b=document.createElement("button");b.className="secondary";b.style.margin="0";b.textContent=d.title+" · "+d.lifecycle;b.addEventListener("click",async()=>{b.disabled=true;const {data:link,error:e}=await supabase.storage.from("gari-documents").createSignedUrl(d.object_path,60);if(e)status.textContent="Unable to access this document.";else window.open(link.signedUrl,"_blank","noopener");b.disabled=false;});row.append(b);
+ if(currentRole==="admin"){
+ const controls=document.createElement("span");controls.style.marginLeft="10px";
+ const move=document.createElement("button");move.className="secondary";move.textContent="Move";move.style.margin="4px";
+ move.addEventListener("click",async()=>{
+ const choices=Object.entries(folderNames).map(([k,v])=>k+" — "+v).join("\n");
+ const target=prompt("Move "+d.title+" to which directory? Enter its two-digit number:\n"+choices,d.folder);
+ if(target===null)return;
+ const dest=target.trim();
+ if(!Object.hasOwn(folderNames,dest)){status.textContent="Choose a valid two-digit directory number.";return;}
+ if(dest===d.folder)return;
+ if(!confirm("Move "+d.title+" from "+folderNames[d.folder]+" to "+folderNames[dest]+"?"))return;
+ move.disabled=true;status.textContent="Moving document…";
+ const oldPath=d.object_path,newPath=dest+oldPath.slice(oldPath.indexOf("/"));
+ const {error:storageError}=await supabase.storage.from("gari-documents").move(oldPath,newPath);
+ if(storageError){status.textContent="Move failed: "+storageError.message;move.disabled=false;return;}
+ const {error:dbError}=await supabase.from("gari_documents").update({folder:dest,object_path:newPath}).eq("id",d.id);
+ if(dbError){
+ const {error:undoError}=await supabase.storage.from("gari-documents").move(newPath,oldPath);
+ status.textContent=undoError?"Database update failed and automatic rollback failed. Contact an administrator; new storage path: "+newPath:"Move was rolled back: "+dbError.message;
+ move.disabled=false;return;
+ }
+ await renderDocuments();
+ });
+ const del=document.createElement("button");del.className="secondary";del.textContent="Delete";del.style.margin="4px";
+ del.addEventListener("click",async()=>{
+ if(!confirm("Permanently delete "+d.title+"? This cannot be undone."))return;
+ del.disabled=true;status.textContent="Deleting document…";
+ const {error:storageError}=await supabase.storage.from("gari-documents").remove([d.object_path]);
+ if(storageError){status.textContent="Delete failed: "+storageError.message;del.disabled=false;return;}
+ const {error:dbError}=await supabase.from("gari_documents").delete().eq("id",d.id);
+ if(dbError){status.textContent="Stored file deleted but database record could not be cleared. Contact the portal administrator: "+dbError.message;del.disabled=false;return;}
+ await renderDocuments();
+ });
+ controls.append(move,del);row.append(controls);
+ }
+ block.append(row);}
  folders.append(block);
  }
 }
